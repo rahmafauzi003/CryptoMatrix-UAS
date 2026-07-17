@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+
+<html lang="id">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RuangSandi | DES</title>
+<link href="styles.css" rel="stylesheet"/>
+<link href="../assets/favicon.svg" rel="icon" type="image/svg+xml"/><link href="../assets/unified.css" rel="stylesheet"/><script>try{document.documentElement.dataset.theme=localStorage.getItem('ruangsandi-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(_){}</script></head>
+<body class="algorithm-page algorithm-des" data-algorithm="des"><header class="site-header">
+<div class="site-header__inner">
+<a aria-label="Beranda RuangSandi" class="site-brand" href="../index.html">
+<span class="site-brand__mark">RS</span>
+<span><strong>RuangSandi</strong><small>Laboratorium Kriptografi Simetris</small></span>
+</a>
+<nav aria-label="Navigasi algoritma" class="site-menu" data-site-menu="">
+<a href="../index.html">Beranda</a>
+<a data-algorithm-link="des" href="../des/">DES</a>
+<a data-algorithm-link="sdes" href="../sdes/">S-DES</a>
+<a data-algorithm-link="aes" href="../aes/">AES-128</a>
+<a data-algorithm-link="saes" href="../saes/">S-AES</a>
+</nav>
+<div class="site-actions">
+<button aria-expanded="false" aria-label="Buka menu" class="menu-toggle" data-menu-toggle="" type="button">☰</button>
+<button aria-pressed="false" class="theme-toggle" data-theme-toggle="" type="button"><span data-theme-icon="">◐</span><span data-theme-label="">Gelap</span></button>
+</div>
+</div>
+</header><section aria-label="Identitas algoritma" class="algorithm-banner">
+<div class="algorithm-banner__copy">
+<span class="algorithm-banner__number">01</span>
+<div><strong>Algoritma DES</strong><p>Data Encryption Standard 64-bit · Enkripsi, dekripsi, dan langkah penyelesaian.</p></div>
+</div>
+<a href="../index.html#algoritma">← Kembali ke daftar algoritma</a>
+</section>
+<div class="orb orb-a"></div>
+<div class="orb orb-b"></div>
+<header class="topbar">
+<a aria-label="DES RuangSandi" class="brand" href="#inputSection">
+<span class="brand-mark">RS</span>
+<span>
+<strong>DES RuangSandi</strong>
+<small>64-bit DES Visual Simulator</small>
+</span>
+</a>
+<nav aria-label="Fitur utama" class="nav-tags">
+<span>Binary / Hex</span>
+<span>PC-1 &amp; PC-2</span>
+<span>16 Rounds</span>
+<span>S-Box Trace</span>
+</nav>
+</header>
+<main class="page-grid">
+<section class="hero-terminal">
+<div class="terminal-head">
+<span></span><span></span><span></span>
+<b>DES TRACE SESSION</b>
+</div>
+<div class="terminal-body">
+<p class="eyebrow">Cryptography Lab</p>
+<h1>Telusuri langkah DES dalam mode visual interaktif.</h1>
+<p>
+          DES RuangSandi dirancang untuk menampilkan alur Data Encryption Standard secara terstruktur:
+          input 64-bit, key schedule, permutasi awal, fungsi Feistel, S-Box, swap, IP invers,
+          hingga verifikasi round-trip.
+        </p>
+<div class="hero-actions">
+<a class="primary-link" href="#inputSection">Buka Panel Simulasi</a>
+<button class="outline-btn" id="selfTestBtn" type="button">Self-Test</button>
+</div>
+<p class="status-line" id="statusLine">RuangSandi siap menjalankan simulasi DES 64-bit.</p>
+</div>
+</section>
+<aside aria-label="Data uji standar" class="sample-card">
+<p class="eyebrow">Data Uji Ketiga</p>
+<h2>Sample Validasi</h2>
+<div class="sample-list">
+<div>
+<span>Plaintext Hex</span>
+<code>6A0F3C9D12B7E845</code>
+</div>
+<div>
+<span>Key Hex</span>
+<code>4D7A1C8E9B2036F5</code>
+</div>
+<div>
+<span>Ciphertext</span>
+<code>8271C1AAE8819F0B</code>
+</div>
+</div>
+</aside>
+<section class="glass-panel input-panel" id="inputSection">
+<div class="section-title">
+<div>
+<p class="eyebrow">Control Matrix</p>
+<h2>Masukkan plaintext/ciphertext dan kunci</h2>
+<p class="muted">Gunakan biner tepat 64-bit atau heksadesimal tepat 16 digit. Sistem akan membatasi input dan
+            menampilkan penghitung panjang data.</p>
+</div>
+</div>
+<div class="quick-fill">
+<button class="neon-btn" id="fillSampleHexBtn" type="button">Enkripsi Hex</button>
+<button class="neon-btn" id="fillSampleBinBtn" type="button">Enkripsi Biner</button>
+<button class="neon-btn" id="fillDecryptHexBtn" type="button">Dekripsi Hex</button>
+<button class="neon-btn" id="fillDecryptBinBtn" type="button">Dekripsi Biner</button>
+</div>
+<div class="form-grid">
+<label class="field">
+<span>Format Input</span>
+<select id="inputFormat">
+<option value="bin">Biner 64-bit</option>
+<option value="hex">Heksadesimal 16 digit</option>
+</select>
+</label>
+<label class="field">
+<span>Mode Operasi</span>
+<select id="mode">
+<option value="encrypt">Enkripsi</option>
+<option value="decrypt">Dekripsi</option>
+</select>
+</label>
+</div>
+<div class="textarea-grid">
+<label class="field full">
+<span id="inputLabel">Plaintext / Ciphertext 64-bit</span>
+<textarea id="messageInput" placeholder="Hex: 6A0F3C9D12B7E845
+atau biner: 0110101000001111001111001001110100010010101101111110100001000101" rows="6" spellcheck="false"></textarea>
+<small class="input-counter" id="messageCounter">0/64 bit biner</small>
+</label>
+<label class="field full">
+<span>Kunci DES 64-bit</span>
+<textarea id="keyInput" placeholder="Hex: 4D7A1C8E9B2036F5
+atau biner: 0100110101111010000111001000111010011011001000000011011011110101" rows="6" spellcheck="false"></textarea>
+<small class="input-counter" id="keyCounter">0/64 bit biner</small>
+</label>
+</div>
+<div class="actions">
+<button class="primary-btn" id="processBtn" type="button">Mulai Trace DES</button>
+<button class="secondary-btn" disabled="" id="roundTripBtn" type="button">Round-trip</button>
+<button class="danger-btn" id="resetBtn" type="button">Clear</button>
+</div>
+<p class="error-box" hidden="" id="errorBox"></p>
+</section>
+<section class="result-grid" hidden="" id="resultSection">
+<article class="glass-panel result-card">
+<div class="section-title compact-title">
+<div>
+<p class="eyebrow">Output Node</p>
+<h2 id="resultTitle">Ciphertext</h2>
+</div>
+<button class="neon-btn" id="copyOutputBtn" type="button">Salin Output</button>
+</div>
+<p class="detected" id="detectedInfo">-</p>
+<div class="preview-row">
+<div><span>Input Hex</span><code id="inputHexPreview">-</code></div>
+<div><span>Key Hex</span><code id="keyHexPreview">-</code></div>
+</div>
+<div class="result-value" id="hexOutput">-</div>
+<p class="muted">Representasi biner hasil akhir ditampilkan sebagai grid bit.</p>
+<div class="bit-grid compact" id="binaryOutput"></div>
+</article>
+<article class="glass-panel result-card verify-card">
+<p class="eyebrow">Integrity Check</p>
+<h2>Round-trip Test</h2>
+<p class="muted">Output diproses kembali dengan kunci yang sama untuk memastikan hasil kembali ke input awal.
+        </p>
+<div class="verify-box" id="roundTripResult">Belum dijalankan.</div>
+</article>
+</section>
+<section class="glass-panel analysis-panel" hidden="" id="keyScheduleSection">
+<div class="section-title">
+<div>
+<p class="eyebrow">Key Schedule Trace</p>
+<h2>Pembentukan subkunci K1 sampai K16</h2>
+<p class="muted">Kunci 64-bit diproses melalui PC-1, dibagi menjadi C0 dan D0, digeser berdasarkan LS, lalu
+            dipermutasi PC-2 menjadi subkunci 48-bit.</p>
+</div>
+<button class="neon-btn toggle-btn" data-target="keyScheduleBody" type="button">Sembunyikan</button>
+</div>
+<div id="keyScheduleBody">
+<div class="step-box glow-box">
+<div class="step-head">
+<h3>PC-1 Output</h3>
+<code id="pc1Hex">-</code>
+</div>
+<p class="muted">Hasil PC-1 berukuran 56-bit karena bit paritas tidak dipakai dalam pembentukan subkunci.</p>
+<div class="bit-grid" id="pc1Bits"></div>
+</div>
+<div class="two-col">
+<div class="step-box">
+<h3>C0</h3>
+<div class="bit-grid compact" id="c0Bits"></div>
+</div>
+<div class="step-box">
+<h3>D0</h3>
+<div class="bit-grid compact" id="d0Bits"></div>
+</div>
+</div>
+<div class="table-wrap">
+<table id="subkeyTable">
+<thead>
+<tr>
+<th>Subkunci</th>
+<th>LS</th>
+<th>Cn setelah LS</th>
+<th>Dn setelah LS</th>
+<th>Kn hasil PC-2</th>
+<th>Hex</th>
+</tr>
+</thead>
+<tbody></tbody>
+</table>
+</div>
+</div>
+</section>
+<section class="glass-panel analysis-panel" hidden="" id="processSection">
+<div class="section-title">
+<div>
+<p class="eyebrow">Feistel Path</p>
+<h2>IP, 16 round, S-Box, swap, dan IP invers</h2>
+<p class="muted">Setiap round memperlihatkan ekspansi E, XOR dengan subkunci, substitusi S-Box, permutasi P,
+            serta perubahan L dan R.</p>
+</div>
+<button class="neon-btn toggle-btn" data-target="processBody" type="button">Sembunyikan</button>
+</div>
+<div id="processBody">
+<div class="step-box glow-box">
+<div class="step-head">
+<h3>Initial Permutation (IP)</h3>
+<code id="ipHex">-</code>
+</div>
+<div class="bit-grid" id="ipBits"></div>
+<div class="two-col mt">
+<div>
+<h4>L0</h4>
+<div class="bit-grid compact" id="l0Bits"></div>
+</div>
+<div>
+<h4>R0</h4>
+<div class="bit-grid compact" id="r0Bits"></div>
+</div>
+</div>
+</div>
+<div class="rounds" id="roundsContainer"></div>
+<div class="step-box">
+<div class="step-head">
+<h3>Preoutput R16 + L16</h3>
+<code id="preoutputHex">-</code>
+</div>
+<p class="muted">Setelah round ke-16, R16 dan L16 digabung sebelum diproses oleh IP invers.</p>
+<div class="bit-grid" id="preoutputBits"></div>
+</div>
+<div class="step-box">
+<h3>Inverse Initial Permutation (IP<sup>-1</sup>)</h3>
+<div class="bit-grid" id="finalBits"></div>
+</div>
+</div>
+</section>
+</main>
+<footer class="footer">
+<p>DES RuangSandi</p>
+</footer>
+<script src="app.js"></script>
+<footer class="site-footer">
+<span>RuangSandi · Aplikasi Simulasi Algoritma Kriptografi</span>
+<span>Gunakan data yang sama untuk aplikasi dan perhitungan manual.</span>
+</footer><script src="../assets/theme.js"></script></body>
+</html>

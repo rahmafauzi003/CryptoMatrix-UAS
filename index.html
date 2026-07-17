@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description"
+    content="CryptoMatrix, aplikasi web simulasi algoritma kriptografi DES, S-DES, AES-128, dan S-AES dengan perhitungan langkah demi langkah." />
+  <title>Cryptomatrix | Simulasi Algoritma Kriptografi</title>
+  <link rel="stylesheet" href="assets/unified.css" />
+  <link rel="stylesheet" href="assets/landing.css" />
+  <script>
+    try { document.documentElement.dataset.theme = localStorage.getItem('cryptomatrix-theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'); } catch (_) { }
+  </script>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a class="site-brand" href="index.html" aria-label="Beranda CryptoMatrix">
+        <span class="site-brand__mark">CM</span>
+        <span><strong>CryptoMatrix</strong><small>Laboratorium Kriptografi Simetris</small></span>
+      </a>
+      <nav class="site-menu" data-site-menu aria-label="Navigasi utama">
+        <a class="is-active" href="index.html">Beranda</a>
+        <a data-algorithm-link="des" href="des/">DES</a>
+        <a data-algorithm-link="sdes" href="sdes/">S-DES</a>
+        <a data-algorithm-link="aes" href="aes/">AES-128</a>
+        <a data-algorithm-link="saes" href="saes/">S-AES</a>
+      </nav>
+      <div class="site-actions">
+        <button class="menu-toggle" type="button" data-menu-toggle aria-expanded="false"
+          aria-label="Buka menu">☰</button>
+        <button class="theme-toggle" type="button" data-theme-toggle aria-pressed="false"><span
+            data-theme-icon>◐</span><span data-theme-label>Gelap</span></button>
+      </div>
+    </div>
+  </header>
+
+  <main class="landing-main">
+    <section class="landing-hero">
+      <article class="hero-copy">
+        <p class="landing-kicker">Kriptografi</p>
+        <h1>Empat algoritma.<br /><em>Satu ruang belajar.</em></h1>
+        <p>CryptoMatrix menyatukan DES, S-DES, AES-128, dan S-AES dalam satu aplikasi. Setiap algoritma menyediakan
+          enkripsi, dekripsi, hasil akhir, serta rincian pembentukan kunci dan proses ronde untuk mendukung verifikasi
+          perhitungan manual.</p>
+        <div class="hero-actions">
+          <a class="primary" href="#algoritma">Pilih Algoritma</a>
+          <a class="secondary" href="#data-uji">Lihat Data Contoh Perhitungan Manual</a>
+        </div>
+      </article>
+
+      <aside class="hero-index" aria-label="Daftar algoritma">
+        <div class="hero-index__head"><strong>Daftar Algoritma</strong><span>4 pilihan</span></div>
+        <a class="index-row" href="des/"><b>01</b><span><strong>DES</strong><small>Blok 64-bit · 16
+              ronde</small></span><i>↗</i></a>
+        <a class="index-row" href="sdes/"><b>02</b><span><strong>S-DES</strong><small>Blok 8-bit · kunci
+              10-bit</small></span><i>↗</i></a>
+        <a class="index-row" href="aes/"><b>03</b><span><strong>AES-128</strong><small>State 4 × 4 byte · 10
+              ronde</small></span><i>↗</i></a>
+        <a class="index-row" href="saes/"><b>04</b><span><strong>S-AES</strong><small>State 2 × 2 nibble · 2
+              ronde</small></span><i>↗</i></a>
+      </aside>
+    </section>
+
+    <section id="algoritma" class="section-block">
+      <div class="section-heading">
+        <div>
+          <p class="landing-kicker">Pilih area simulasi</p>
+          <h2>Algoritma yang tersedia</h2>
+        </div>
+      </div>
+      <div class="algorithm-grid">
+        <a class="algorithm-card" href="des/">
+          <div class="algorithm-card__top"><span class="algorithm-card__number">01</span><span
+              class="algorithm-card__tag">FULL DES</span></div>
+          <h3>Data Encryption Standard</h3>
+          <p>Telusuri PC-1, PC-2, pembentukan K1 sampai K16, initial permutation, 16 ronde Feistel, delapan S-Box, dan
+            inverse initial permutation.</p>
+          <div class="algorithm-card__meta"><span>Input 64-bit</span><strong>Mulai simulasi ↗</strong></div>
+        </a>
+        <a class="algorithm-card" href="sdes/">
+          <div class="algorithm-card__top"><span class="algorithm-card__number">02</span><span
+              class="algorithm-card__tag">SIMPLIFIED</span></div>
+          <h3>Simplified DES</h3>
+          <p>Pelajari P10, LS-1, LS-2, P8, K1 dan K2, initial permutation, dua fungsi ronde, S0, S1, swap, dan IP
+            invers.</p>
+          <div class="algorithm-card__meta"><span>Input 8-bit</span><strong>Mulai simulasi ↗</strong></div>
+        </a>
+        <a class="algorithm-card" href="aes/">
+          <div class="algorithm-card__top"><span class="algorithm-card__number">03</span><span
+              class="algorithm-card__tag">AES-128</span></div>
+          <h3>Advanced Encryption Standard</h3>
+          <p>Amati key expansion W[0] sampai W[43], RK0 sampai RK10, SubBytes, ShiftRows, MixColumns, AddRoundKey, dan
+            seluruh operasi invers.</p>
+          <div class="algorithm-card__meta"><span>Input 128-bit</span><strong>Mulai simulasi ↗</strong></div>
+        </a>
+        <a class="algorithm-card" href="saes/">
+          <div class="algorithm-card__top"><span class="algorithm-card__number">04</span><span
+              class="algorithm-card__tag">S-AES</span></div>
+          <h3>Simplified AES</h3>
+          <p>Ikuti pembentukan w0 sampai w5, K0 sampai K2, SubNibbles, ShiftRows, MixColumns pada GF(2⁴), dan proses
+            dekripsi invers.</p>
+          <div class="algorithm-card__meta"><span>Input 16-bit</span><strong>Mulai simulasi ↗</strong></div>
+        </a>
+      </div>
+    </section>
+
+    <section id="data-uji" class="section-block">
+      <div class="section-heading">
+        <div>
+          <p class="landing-kicker">Konsistensi pengujian</p>
+          <h2>Data contoh Perhitungan Manual</h2>
+        </div>
+        <p>Nilai berikut sama dengan data contoh pada perhitungan manual.</p>
+      </div>
+      <div class="test-table-wrap">
+        <table class="test-table">
+          <thead>
+            <tr>
+              <th>Algoritma</th>
+              <th>Plaintext</th>
+              <th>Kunci</th>
+              <th>Ciphertext</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>DES</strong></td>
+              <td><code>6A0F3C9D12B7E845</code></td>
+              <td><code>4D7A1C8E9B2036F5</code></td>
+              <td><code>8271C1AAE8819F0B</code></td>
+            </tr>
+            <tr>
+              <td><strong>S-DES</strong></td>
+              <td><code>10010101</code></td>
+              <td><code>1001010100</code></td>
+              <td><code>01100101</code></td>
+            </tr>
+            <tr>
+              <td><strong>AES-128</strong></td>
+              <td><code>00112233445566778899AABBCCDDEEFF</code></td>
+              <td><code>000102030405060708090A0B0C0D0E0F</code></td>
+              <td><code>69C4E0D86A7B0430D8CDB78070B4C55A</code></td>
+            </tr>
+            <tr>
+              <td><strong>S-AES</strong></td>
+              <td><code>CAFE</code></td>
+              <td><code>BEEF</code></td>
+              <td><code>2855</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section-block">
+      <div class="section-heading">
+        <div>
+          <p class="landing-kicker">Alur penggunaan</p>
+          <h2>Dari input ke validasi</h2>
+        </div>
+      </div>
+      <div class="workflow">
+        <article><b>01 · Pilih algoritma</b>
+          <p>Buka DES, S-DES, AES-128, atau S-AES dari navigasi utama.</p>
+        </article>
+        <article><b>02 · Isi input</b>
+          <p>Pilih enkripsi atau dekripsi, lalu masukkan data dan kunci sesuai panjang yang ditentukan.</p>
+        </article>
+        <article><b>03 · Tinjau langkah</b>
+          <p>Periksa pembentukan kunci, transformasi state, fungsi ronde, dan output setiap tahap.</p>
+        </article>
+        <article><b>04 · Cocokkan hasil</b>
+          <p>Bandingkan hasil aplikasi dengan dokumen perhitungan manual menggunakan kasus yang sama.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><span>CryptoMatrix · Simulasi Kriptografi Simetris</span><span>DES · S-DES · AES-128 ·
+      S-AES</span></footer>
+  <script src="assets/theme.js"></script>
+</body>
+
+</html>

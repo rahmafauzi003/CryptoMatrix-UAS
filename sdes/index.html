@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+
+<html lang="id">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RuangSandi | S-DES</title>
+<link href="style.css" rel="stylesheet"/>
+<link href="../assets/favicon.svg" rel="icon" type="image/svg+xml"/><link href="../assets/unified.css" rel="stylesheet"/><script>try{document.documentElement.dataset.theme=localStorage.getItem('ruangsandi-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(_){}</script></head>
+<body class="algorithm-page algorithm-sdes" data-algorithm="sdes"><header class="site-header">
+<div class="site-header__inner">
+<a aria-label="Beranda RuangSandi" class="site-brand" href="../index.html">
+<span class="site-brand__mark">RS</span>
+<span><strong>RuangSandi</strong><small>Laboratorium Kriptografi Simetris</small></span>
+</a>
+<nav aria-label="Navigasi algoritma" class="site-menu" data-site-menu="">
+<a href="../index.html">Beranda</a>
+<a data-algorithm-link="des" href="../des/">DES</a>
+<a data-algorithm-link="sdes" href="../sdes/">S-DES</a>
+<a data-algorithm-link="aes" href="../aes/">AES-128</a>
+<a data-algorithm-link="saes" href="../saes/">S-AES</a>
+</nav>
+<div class="site-actions">
+<button aria-expanded="false" aria-label="Buka menu" class="menu-toggle" data-menu-toggle="" type="button">☰</button>
+<button aria-pressed="false" class="theme-toggle" data-theme-toggle="" type="button"><span data-theme-icon="">◐</span><span data-theme-label="">Gelap</span></button>
+</div>
+</div>
+</header><section aria-label="Identitas algoritma" class="algorithm-banner">
+<div class="algorithm-banner__copy">
+<span class="algorithm-banner__number">02</span>
+<div><strong>Algoritma S-DES</strong><p>Simplified Data Encryption Standard · Enkripsi, dekripsi, dan langkah penyelesaian.</p></div>
+</div>
+<a href="../index.html#algoritma">← Kembali ke daftar algoritma</a>
+</section>
+<div aria-hidden="true" class="matrix-bg"></div>
+<header class="topbar">
+<div class="logo-wrap">
+<div class="logo">RS</div>
+<div>
+<p class="app-name">RuangSandi</p>
+<p class="app-subtitle">S-DES Visual Engine</p>
+</div>
+</div>
+<div class="status-pill">8-bit Block • 10-bit Key</div>
+</header>
+<main class="main-layout">
+<section class="intro-panel">
+<p class="kicker">Simplified Data Encryption Standard</p>
+<h1>Eksperimen Enkripsi dan Dekripsi dalam Bentuk Bit</h1>
+<p>
+        Masukkan nilai biner, jalankan proses S-DES, lalu amati perubahan bit melalui
+        key generation, permutation, round function, S-Box, swap, dan inverse IP.
+      </p>
+<div class="flow-strip">
+<span>P10</span>
+<span>K1/K2</span>
+<span>IP</span>
+<span>fK</span>
+<span>SW</span>
+<span>IP<sup>-1</sup></span>
+</div>
+</section>
+<section class="console-grid">
+<section class="terminal-card input-card">
+<div class="card-title-row">
+<span class="card-code">01</span>
+<div>
+<h2>Input Console</h2>
+<p>Gunakan plaintext/ciphertext 8-bit dan key 10-bit.</p>
+</div>
+</div>
+<form autocomplete="off" id="sdesForm">
+<div class="form-grid">
+<div class="form-group">
+<label for="inputBits">Plaintext / Ciphertext 8-bit</label>
+<input id="inputBits" inputmode="numeric" maxlength="8" placeholder="10010101" type="text"/>
+<small>Hanya angka 0 dan 1, total 8 digit.</small>
+</div>
+<div class="form-group">
+<label for="keyBits">Key 10-bit</label>
+<input id="keyBits" inputmode="numeric" maxlength="10" placeholder="1001010100" type="text"/>
+<small>Hanya angka 0 dan 1, total 10 digit.</small>
+</div>
+</div>
+<div class="mode-area">
+<p>Mode Operasi</p>
+<label class="radio-card">
+<input checked="" name="mode" type="radio" value="encrypt"/>
+<span>Enkripsi</span>
+</label>
+<label class="radio-card">
+<input name="mode" type="radio" value="decrypt"/>
+<span>Dekripsi</span>
+</label>
+</div>
+<div class="error hidden" id="errorBox"></div>
+<div class="actions">
+<button class="btn primary" type="submit">SUBMIT</button>
+<button class="btn secondary" id="resetBtn" type="button">RESET</button>
+<button class="btn ghost" id="exampleBtn" type="button">ISI CONTOH</button>
+</div>
+</form>
+</section>
+<section class="terminal-card result-card hidden" id="resultSection">
+<div class="card-title-row">
+<span class="card-code">02</span>
+<div>
+<h2>Result Monitor</h2>
+<p id="resultDescription">Output akhir proses S-DES.</p>
+</div>
+</div>
+<div class="result-panel">
+<p class="result-label" id="resultLabel">Ciphertext</p>
+<div class="bit-output" id="resultBits"></div>
+</div>
+</section>
+</section>
+<section class="terminal-card solution-card hidden" id="solutionSection">
+<button class="toggle" id="toggleSolution" type="button">
+        Tampilkan Solusi Penyelesaian
+      </button>
+<div class="solution hidden" id="solutionBox">
+<div id="solutionContent"></div>
+</div>
+</section>
+</main>
+<footer class="footer">
+<p>RuangSandi S-DES • Matrix Style Interface</p>
+</footer>
+<script src="script.js"></script>
+<footer class="site-footer">
+<span>RuangSandi · Aplikasi Simulasi Algoritma Kriptografi</span>
+<span>Gunakan data yang sama untuk aplikasi dan perhitungan manual.</span>
+</footer><script src="../assets/theme.js"></script></body>
+</html>

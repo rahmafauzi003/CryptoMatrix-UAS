@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+
+<html lang="id">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="RuangSandi, simulator Simplified AES 16-bit dengan visualisasi proses enkripsi dan dekripsi secara lengkap." name="description"/>
+<title>RuangSandi | S-AES</title>
+<link href="style.css" rel="stylesheet"/>
+<link href="../assets/favicon.svg" rel="icon" type="image/svg+xml"/><link href="../assets/unified.css" rel="stylesheet"/><script>try{document.documentElement.dataset.theme=localStorage.getItem('ruangsandi-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(_){}</script></head>
+<body class="algorithm-page algorithm-saes" data-algorithm="saes"><header class="site-header">
+<div class="site-header__inner">
+<a aria-label="Beranda RuangSandi" class="site-brand" href="../index.html">
+<span class="site-brand__mark">RS</span>
+<span><strong>RuangSandi</strong><small>Laboratorium Kriptografi Simetris</small></span>
+</a>
+<nav aria-label="Navigasi algoritma" class="site-menu" data-site-menu="">
+<a href="../index.html">Beranda</a>
+<a data-algorithm-link="des" href="../des/">DES</a>
+<a data-algorithm-link="sdes" href="../sdes/">S-DES</a>
+<a data-algorithm-link="aes" href="../aes/">AES-128</a>
+<a data-algorithm-link="saes" href="../saes/">S-AES</a>
+</nav>
+<div class="site-actions">
+<button aria-expanded="false" aria-label="Buka menu" class="menu-toggle" data-menu-toggle="" type="button">☰</button>
+<button aria-pressed="false" class="theme-toggle" data-theme-toggle="" type="button"><span data-theme-icon="">◐</span><span data-theme-label="">Gelap</span></button>
+</div>
+</div>
+</header><section aria-label="Identitas algoritma" class="algorithm-banner">
+<div class="algorithm-banner__copy">
+<span class="algorithm-banner__number">04</span>
+<div><strong>Algoritma S-AES</strong><p>Simplified Advanced Encryption Standard · Enkripsi, dekripsi, dan langkah penyelesaian.</p></div>
+</div>
+<a href="../index.html#algoritma">← Kembali ke daftar algoritma</a>
+</section>
+<div aria-hidden="true" class="matrix-noise"></div>
+<header class="hero">
+<nav aria-label="Navigasi utama" class="topbar container">
+<a aria-label="RuangSandi" class="brand" href="#top">
+<span class="brand__mark">RS</span>
+<span class="brand__copy">
+<strong>RuangSandi</strong>
+<small>S-AES Security Console</small>
+</span>
+</a>
+<div class="topbar__status">
+<span class="live-dot"></span>
+<span>CORE ONLINE</span>
+<button aria-label="Ganti tema" class="icon-button" id="themeButton" title="Ganti tema" type="button">
+<span aria-hidden="true">◐</span>
+</button>
+</div>
+</nav>
+<div class="hero__inner container" id="top">
+<div class="hero__content">
+<p class="eyebrow"><span>01</span> CRYPTOGRAPHIC PROCESSING UNIT</p>
+<h1>Encode the block.<br/><em>Expose every round.</em></h1>
+<p class="hero__subtitle">
+          Laboratorium interaktif untuk menelusuri enkripsi dan dekripsi Simplified AES 16-bit, mulai dari pembangkitan
+          kunci hingga keluaran akhir.
+        </p>
+<div aria-label="Spesifikasi algoritma" class="hero__metrics">
+<article><strong>16</strong><span>BIT BLOCK</span></article>
+<article><strong>16</strong><span>BIT KEY</span></article>
+<article><strong>02</strong><span>ROUNDS</span></article>
+<article><strong>2⁴</strong><span>GALOIS FIELD</span></article>
+</div>
+</div>
+<div aria-hidden="true" class="hero__visual">
+<div class="core-orbit core-orbit--one"></div>
+<div class="core-orbit core-orbit--two"></div>
+<div class="core-grid">
+<span>1</span><span>0</span><span>1</span><span>1</span>
+<span>0</span><span>1</span><span>0</span><span>0</span>
+<span>1</span><span>1</span><span>0</span><span>1</span>
+<span>0</span><span>0</span><span>1</span><span>0</span>
+</div>
+<div class="core-label">S-AES<br/>16</div>
+</div>
+</div>
+</header>
+<main class="container main-layout">
+<section aria-label="Panel utama RuangSandi" class="console-grid">
+<aside class="console-sidebar">
+<p class="sidebar-label">DAFTAR ALGORITMA</p>
+<div class="module-item module-item--active"><span>01</span><strong>Input Console</strong></div>
+<div class="module-item"><span>02</span><strong>Round Keys</strong></div>
+<div class="module-item"><span>03</span><strong>State Matrix</strong></div>
+<div class="module-item"><span>04</span><strong>Algorithm Reference</strong></div>
+<div class="sidebar-info">
+<span>ENGINE</span>
+<strong>S-AES / GF(2⁴)</strong>
+<small>Modulus x⁴ + x + 1</small>
+</div>
+</aside>
+<section aria-labelledby="input-title" class="card input-card">
+<div class="section-heading">
+<div>
+<p class="section-kicker">COMMAND / INPUT</p>
+<h2 id="input-title">Configure operation</h2>
+</div>
+<span class="panel-index">01</span>
+</div>
+<form id="saesForm" novalidate="">
+<fieldset class="mode-selector">
+<legend>Pilih mode operasi</legend>
+<label class="mode-option">
+<input checked="" name="mode" type="radio" value="encrypt"/>
+<span class="mode-icon">E</span>
+<span>
+<strong>Enkripsi</strong>
+<small>Plaintext → Ciphertext</small>
+</span>
+</label>
+<label class="mode-option">
+<input name="mode" type="radio" value="decrypt"/>
+<span class="mode-icon">D</span>
+<span>
+<strong>Dekripsi</strong>
+<small>Ciphertext → Plaintext</small>
+</span>
+</label>
+</fieldset>
+<div class="input-grid">
+<div class="form-group">
+<div class="label-row">
+<label for="dataInput" id="dataLabel">Plaintext 16-bit</label>
+<span class="char-count" id="dataCount">0/16 bit</span>
+</div>
+<div class="terminal-input">
+<span class="terminal-prefix">DATA://</span>
+<input aria-describedby="dataHelp dataError" autocomplete="off" id="dataInput" inputmode="numeric" maxlength="23" name="dataInput" placeholder="1100 1010 1111 1110" spellcheck="false" type="text"/>
+</div>
+<small id="dataHelp">Masukkan tepat 16 karakter biner. Spasi antarnibble diperbolehkan.</small>
+<p class="error-message" id="dataError" role="alert"></p>
+</div>
+<div class="form-group">
+<div class="label-row">
+<label for="keyInput">Kunci 16-bit</label>
+<span class="char-count" id="keyCount">0/16 bit</span>
+</div>
+<div class="terminal-input">
+<span class="terminal-prefix">KEY://</span>
+<input aria-describedby="keyHelp keyError" autocomplete="off" id="keyInput" inputmode="numeric" maxlength="23" name="keyInput" placeholder="1011 1110 1110 1111" spellcheck="false" type="text"/>
+</div>
+<small id="keyHelp">Kunci selalu berukuran 16-bit untuk enkripsi maupun dekripsi.</small>
+<p class="error-message" id="keyError" role="alert"></p>
+</div>
+</div>
+<div aria-labelledby="example-title" class="example-panel">
+<div class="example-panel__header">
+<div>
+<span class="example-panel__eyebrow">TEST VECTOR DATABASE</span>
+<strong id="example-title">Jalankan skenario pengujian bawaan</strong>
+</div>
+<span class="example-chip">READY</span>
+</div>
+<div class="example-control-row">
+<div aria-describedby="exampleHelp" class="single-vector-label">
+<span>RUANGSANDI VECTOR / CM-01</span>
+<strong>P: CAFE  •  K: BEEF  •  C: 2855</strong>
+</div>
+<button class="button button--example" id="fillExampleButton" type="button">LOAD VECTOR</button>
+<button class="button button--secondary" id="runExampleButton" type="button">LOAD &amp; EXECUTE</button>
+</div>
+<div aria-live="polite" class="example-preview" id="examplePreview"></div>
+<small id="exampleHelp">Mode enkripsi memuat plaintext, sedangkan mode dekripsi memuat ciphertext
+              pasangannya.</small>
+</div>
+<div class="form-actions">
+<button class="button button--primary" type="submit"><span>EXECUTE S-AES</span><b>↗</b></button>
+<button class="button button--secondary" id="resetButton" type="reset">CLEAR CONSOLE</button>
+</div>
+</form>
+</section>
+</section>
+<section aria-labelledby="result-title" aria-live="polite" class="card result-card hidden" id="resultPanel">
+<div class="section-heading">
+<div>
+<p class="section-kicker">PROCESS / OUTPUT</p>
+<h2 id="result-title">Operation result</h2>
+</div>
+<span class="status-badge" id="modeBadge">Enkripsi</span>
+</div>
+<div class="result-grid">
+<div class="result-box result-box--binary">
+<span id="binaryResultLabel">Ciphertext biner</span>
+<strong class="mono result-value" id="binaryResult"></strong>
+<button class="copy-button" id="copyBinaryButton" type="button">COPY</button>
+</div>
+<div class="result-box result-box--hex">
+<span id="hexResultLabel">Ciphertext heksadesimal</span>
+<strong class="mono result-value" id="hexResult"></strong>
+<button class="copy-button" id="copyHexButton" type="button">COPY</button>
+</div>
+</div>
+<div class="result-summary" id="resultSummary"></div>
+</section>
+<section aria-labelledby="steps-title" class="steps-panel hidden" id="stepsPanel">
+<div class="steps-toolbar card">
+<div>
+<p class="section-kicker">TRACE / ROUND PROCESS</p>
+<h2 id="steps-title">Execution trace</h2>
+</div>
+<div class="toolbar-actions">
+<button class="button button--small button--secondary" id="expandAllButton" type="button">EXPAND ALL</button>
+<button class="button button--small button--secondary" id="collapseAllButton" type="button">COLLAPSE
+            ALL</button>
+</div>
+</div>
+<div id="stepsContainer"></div>
+</section>
+<section aria-labelledby="reference-title" class="card reference-card">
+<div class="section-heading">
+<div>
+<p class="section-kicker">DATABASE / CONSTANTS</p>
+<h2 id="reference-title">S-AES reference core</h2>
+</div>
+<span class="panel-index">04</span>
+</div>
+<div class="reference-grid">
+<div class="reference-block">
+<h3>S-Box / SubNibble</h3>
+<div class="table-scroll" id="sboxTable"></div>
+</div>
+<div class="reference-block">
+<h3>Inverse S-Box</h3>
+<div class="table-scroll" id="inverseSboxTable"></div>
+</div>
+</div>
+<div class="constant-grid">
+<article class="constant-card"><span>MX-01</span>
+<h3>MixColumns</h3>
+<div aria-label="Matriks MixColumns" class="math-matrix">
+<span>1</span><span>4</span><span>4</span><span>1</span></div>
+</article>
+<article class="constant-card"><span>MX-02</span>
+<h3>InvMixColumns</h3>
+<div aria-label="Matriks inverse MixColumns" class="math-matrix">
+<span>9</span><span>2</span><span>2</span><span>9</span></div>
+</article>
+<article class="constant-card"><span>RC-16</span>
+<h3>Round constants</h3>
+<p class="mono">RCON1 = 1000 0000</p>
+<p class="mono">RCON2 = 0011 0000</p>
+</article>
+<article class="constant-card"><span>GF-04</span>
+<h3>Galois Field</h3>
+<p>GF(2⁴), modulus:</p>
+<p class="formula">m(x) = x⁴ + x + 1</p>
+<p class="mono">10011 / 0x13</p>
+</article>
+</div>
+</section>
+</main>
+<footer>
+<div class="container footer-inner">
+<div><strong>RuangSandi</strong><span>Cryptographic Learning Interface</span></div>
+<p>SIMPLIFIED AES</p>
+</div>
+</footer>
+<div aria-live="polite" class="toast" id="toast" role="status"></div>
+<script src="app.js"></script>
+<footer class="site-footer">
+<span>RuangSandi · Aplikasi Simulasi Algoritma Kriptografi</span>
+<span>Gunakan data yang sama untuk aplikasi dan perhitungan manual.</span>
+</footer><script src="../assets/theme.js"></script></body>
+</html>

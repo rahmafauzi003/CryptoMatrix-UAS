@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+
+<html lang="id">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>RuangSandi | AES-128</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="style.css" rel="stylesheet"/>
+<link href="../assets/favicon.svg" rel="icon" type="image/svg+xml"/><link href="../assets/unified.css" rel="stylesheet"/><script>try{document.documentElement.dataset.theme=localStorage.getItem('ruangsandi-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(_){}</script></head>
+<body class="min-h-screen text-slate-100 algorithm-page algorithm-aes" data-algorithm="aes"><header class="site-header">
+<div class="site-header__inner">
+<a aria-label="Beranda RuangSandi" class="site-brand" href="../index.html">
+<span class="site-brand__mark">RS</span>
+<span><strong>RuangSandi</strong><small>Laboratorium Kriptografi Simetris</small></span>
+</a>
+<nav aria-label="Navigasi algoritma" class="site-menu" data-site-menu="">
+<a href="../index.html">Beranda</a>
+<a data-algorithm-link="des" href="../des/">DES</a>
+<a data-algorithm-link="sdes" href="../sdes/">S-DES</a>
+<a data-algorithm-link="aes" href="../aes/">AES-128</a>
+<a data-algorithm-link="saes" href="../saes/">S-AES</a>
+</nav>
+<div class="site-actions">
+<button aria-expanded="false" aria-label="Buka menu" class="menu-toggle" data-menu-toggle="" type="button">☰</button>
+<button aria-pressed="false" class="theme-toggle" data-theme-toggle="" type="button"><span data-theme-icon="">◐</span><span data-theme-label="">Gelap</span></button>
+</div>
+</div>
+</header><section aria-label="Identitas algoritma" class="algorithm-banner">
+<div class="algorithm-banner__copy">
+<span class="algorithm-banner__number">03</span>
+<div><strong>Algoritma AES-128</strong><p>Advanced Encryption Standard 128-bit · Enkripsi, dekripsi, dan langkah penyelesaian.</p></div>
+</div>
+<a href="../index.html#algoritma">← Kembali ke daftar algoritma</a>
+</section>
+<header class="mx-auto max-w-7xl px-4 pt-6 sm:px-6 lg:px-8">
+<section class="glass hero-panel rounded-[2rem] p-6 sm:p-8 lg:p-10">
+<div class="flex flex-col gap-8 xl:flex-row xl:items-end xl:justify-between">
+<div class="max-w-4xl">
+<div class="inline-flex items-center gap-2 rounded-full border border-cyan-300/25 bg-cyan-300/10 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.25em] text-cyan-200">
+<span class="h-2 w-2 rounded-full bg-cyan-300"></span>
+            RuangSandi
+          </div>
+<h1 class="mt-4 text-3xl font-black tracking-tight text-white sm:text-5xl">RuangSandi AES-128</h1>
+<p class="mt-4 max-w-3xl text-sm leading-7 text-slate-300 sm:text-base">
+            Dashboard simulasi kriptografi bertema cyber-grid untuk menelusuri AES-128 dari input sampai output. Setiap byte ditampilkan sebagai matrix, sehingga Key Expansion, SubBytes, ShiftRows, MixColumns, AddRoundKey, dan proses inverse dapat dibaca seperti alur data keamanan.
+          </p>
+<div class="mt-6 grid gap-3 sm:grid-cols-3">
+<div class="hero-stat">
+<div class="hero-stat-label">Skenario</div>
+<div class="hero-stat-value">Single Block Lab</div>
+</div>
+<div class="hero-stat">
+<div class="hero-stat-label">Cipher Core</div>
+<div class="hero-stat-value">AES-128 · 10 Round</div>
+</div>
+<div class="hero-stat">
+<div class="hero-stat-label">Byte Field</div>
+<div class="hero-stat-value">GF(2<sup>8</sup>) / 0x11B</div>
+</div>
+</div>
+</div>
+<div class="w-full max-w-md rounded-[1.5rem] border border-white/10 bg-white/5 p-5 shadow-2xl shadow-black/20 backdrop-blur">
+<div class="text-xs font-bold uppercase tracking-[0.22em] text-slate-400">Profil Sistem</div>
+<ul class="mt-4 space-y-3 text-sm leading-6 text-slate-300">
+<li class="feature-item"><span class="feature-dot"></span> Engine AES berjalan mandiri memakai Vanilla JavaScript tanpa library kriptografi eksternal.</li>
+<li class="feature-item"><span class="feature-dot"></span> Setiap ronde ditampilkan sebagai panel matrix dengan perubahan byte yang disorot.</li>
+<li class="feature-item"><span class="feature-dot"></span> Memuat bank konstanta AES: S-Box, inverse S-Box, Rcon, MixColumns, dan InvMixColumns.</li>
+</ul>
+</div>
+</div>
+</section>
+</header>
+<main class="mx-auto grid max-w-7xl grid-cols-1 gap-6 px-4 py-6 sm:px-6 lg:grid-cols-[19rem_minmax(0,1fr)] lg:px-8">
+<aside class="space-y-6 lg:sticky lg:top-5 lg:self-start">
+<section class="glass rounded-[1.75rem] p-5">
+<div class="flex items-center justify-between gap-3">
+<div>
+<h2 class="text-sm font-black uppercase tracking-[0.18em] text-slate-200">Panel Ronde</h2>
+<p class="mt-1 text-xs text-slate-400">Lacak posisi visualisasi saat halaman digulir.</p>
+</div>
+<span class="nav-counter" id="navCounter">0</span>
+</div>
+<nav class="mt-4 space-y-1 text-sm" id="roundNav"></nav>
+</section>
+<section class="glass rounded-[1.75rem] p-5">
+<h3 class="text-sm font-black uppercase tracking-[0.18em] text-slate-200">Kode Warna Matrix</h3>
+<div class="mt-4 grid gap-2 text-xs text-slate-300">
+<div class="legend-item"><span class="legend-swatch legend-subbytes"></span> SubBytes</div>
+<div class="legend-item"><span class="legend-swatch legend-shiftrows"></span> ShiftRows</div>
+<div class="legend-item"><span class="legend-swatch legend-mixcolumns"></span> MixColumns</div>
+<div class="legend-item"><span class="legend-swatch legend-key"></span> AddRoundKey / Round Key</div>
+<div class="legend-item"><span class="legend-swatch legend-output"></span> Hasil / State akhir</div>
+</div>
+</section>
+</aside>
+<section class="space-y-6">
+<section class="glass rounded-[1.75rem] p-5 sm:p-6 lg:p-7" id="controls">
+<div class="flex flex-col gap-3 border-b border-white/10 pb-5 sm:flex-row sm:items-center sm:justify-between">
+<div>
+<h2 class="text-2xl font-black text-white">Console Input</h2>
+<p class="mt-1 text-sm leading-6 text-slate-400">Masukkan payload sendiri atau jalankan sampel yang sudah disiapkan.</p>
+</div>
+<div class="flex flex-wrap gap-2">
+<button class="btn-secondary" id="exampleHexBtn">Gunakan Sampel Hex</button>
+<button class="btn-secondary" id="exampleTextBtn">Gunakan Sampel Teks</button>
+<button class="btn-secondary" id="loadVectorBtn">Muat Vector Standar AES</button>
+</div>
+</div>
+<div class="mt-6 grid gap-4 xl:grid-cols-2">
+<div>
+<label class="mb-2 block text-sm font-bold text-slate-200" for="mode">Mode Cipher</label>
+<select class="input-base" id="mode">
+<option value="encrypt">Enkripsi</option>
+<option value="decrypt">Dekripsi</option>
+</select>
+</div>
+<div>
+<label class="mb-2 block text-sm font-bold text-slate-200" for="inputFormat">Format Payload</label>
+<select class="input-base" id="inputFormat">
+<option value="hex">Hexadecimal, 32 digit</option>
+<option value="text">Teks, max 16 byte UTF-8</option>
+</select>
+</div>
+<div class="xl:col-span-2">
+<label class="mb-2 block text-sm font-bold text-slate-200" for="dataInput" id="inputLabel">Payload / Ciphertext</label>
+<textarea class="input-base min-h-[8rem] font-mono text-sm" id="dataInput" placeholder="Contoh hex: ffeeddccbbaa99887766554433221100
+Contoh teks: Matrix Gate 01" rows="4" spellcheck="false"></textarea>
+<p class="mt-2 text-xs leading-5 text-slate-400" id="inputHint">Mode hex membutuhkan tepat 32 digit. State dipetakan secara column-major sesuai AES: s[r,c] = input[r + 4c].</p>
+</div>
+<div class="xl:col-span-2">
+<label class="mb-2 block text-sm font-bold text-slate-200" for="keyInput">Kunci AES-128</label>
+<input class="input-base font-mono text-sm" id="keyInput" placeholder="Contoh: 000102030405060708090a0b0c0d0e0f" spellcheck="false"/>
+<p class="mt-2 text-xs leading-5 text-slate-400">Kunci wajib 32 digit heksadesimal, setara dengan 16 byte.</p>
+</div>
+</div>
+<div class="mt-6 grid gap-3 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
+<div class="grid gap-3 sm:grid-cols-3">
+<div class="info-card">
+<div class="info-card-label">Matrix Block</div>
+<div class="info-card-value">4 × 4 Byte</div>
+</div>
+<div class="info-card">
+<div class="info-card-label">Schedule Key</div>
+<div class="info-card-value">44 Word</div>
+</div>
+<div class="info-card">
+<div class="info-card-label">Result</div>
+<div class="info-card-value">Hex Output</div>
+</div>
+</div>
+<div class="flex flex-col gap-3 sm:flex-row sm:flex-wrap lg:justify-end">
+<button class="btn-primary" id="runBtn">Eksekusi Matrix</button>
+<button class="btn-secondary" id="toggleDetailBtn">Tutup Detail</button>
+<button class="btn-secondary" id="resetBtn">Reset</button>
+</div>
+</div>
+<div class="mt-5 hidden rounded-2xl border px-4 py-3 text-sm" id="message"></div>
+</section>
+<section class="hidden glass rounded-[1.75rem] p-5 sm:p-6" id="summary"></section>
+<section class="space-y-6" id="visualization"></section>
+<section class="glass rounded-[1.75rem] p-5 sm:p-6" id="reference">
+<div class="flex flex-col gap-2 border-b border-white/10 pb-4 sm:flex-row sm:items-end sm:justify-between">
+<div>
+<h2 class="text-xl font-black text-white">Bank Konstanta AES</h2>
+<p class="mt-1 text-sm leading-6 text-slate-400">Kumpulan konstanta yang menjadi dasar transformasi AES-128 dan pembalikan proses dekripsi.</p>
+</div>
+</div>
+<div class="mt-5 space-y-5" id="constantTables"></div>
+</section>
+</section>
+</main>
+<footer class="mx-auto max-w-7xl px-4 pb-8 sm:px-6 lg:px-8">
+<div class="rounded-[1.5rem] border border-white/10 bg-slate-950/55 p-4 text-xs leading-5 text-slate-400">
+      Catatan: RuangSandi dibuat sebagai media belajar dan presentasi teknis AES-128 satu blok. Mode single block dipakai agar alur perubahan byte dapat diperiksa secara langsung dari awal sampai akhir.
+    </div>
+</footer>
+<script src="aes.js"></script>
+<script src="app.js"></script>
+<footer class="site-footer">
+<span>RuangSandi · Aplikasi Simulasi Algoritma Kriptografi</span>
+<span>Gunakan data yang sama untuk aplikasi dan perhitungan manual.</span>
+</footer><script src="../assets/theme.js"></script></body>
+</html>
